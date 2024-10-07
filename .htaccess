@@ -1,0 +1,15 @@
+ErrorDocument 404 http://localhost/khosonvinhlong/404.php
+
+# Kích hoạt mod_rewrite
+RewriteEngine On
+
+# Đảm bảo rằng URL yêu cầu không phải là file hoặc thư mục thực sự
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Quy tắc Rewrite cho controller và action
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?controller=$1&action=index [L]
+
+# Quy tắc Rewrite cho controller, action và id (cho các trang chi tiết)
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)/?$ index.php?controller=$1&action=$2&id=$3 [L]
+
