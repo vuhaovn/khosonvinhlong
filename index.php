@@ -5,6 +5,7 @@ session_start();
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 $id = isset($_GET['id']) ? $_GET['id'] : null;
+$categoryId = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
 
 require_once 'controllers/ProductController.php';
 require_once 'controllers/CategoryController.php';
@@ -24,6 +25,15 @@ switch ($controller) {
                 break;
             case 'detail':
                 $homeController->detail($id);
+                break;
+            case 'listByCategory':
+                $homeController->listByCategory($categoryId);
+                break;
+            case 'about':
+                $homeController->about();
+                break;
+            case 'contact':
+                $homeController->contact();
                 break;
             default:
                 header('Location: 404.php');

@@ -73,7 +73,6 @@ class ProductController
         }
     }
 
-
     // Hiển thị form sửa sản phẩm
     public function edit($id)
     {

@@ -36,6 +36,14 @@ class Product {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getProductsByCategoryId($categoryId) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE category_id = :categoryId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Thêm sản phẩm mới
     public function create($name, $price, $introduce, $category_id, $image, $description) {
         $query = "INSERT INTO " . $this->table_name . " (name, price, introduce, category_id, image, description) VALUES (:name, :price, :introduce, :category_id, :image, :description)";

@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label>Introduce</label>
-        <textarea name="introduce" class="form-control" required></textarea>
+        <textarea name="introduce" id="tiny_introduce"></textarea>
     </div>
     <div class="form-group">
         <label>Category</label>

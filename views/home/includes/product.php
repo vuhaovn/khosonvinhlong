@@ -2,10 +2,10 @@
   <h2 class="text-center text-danger">Các sản phẩm</h2>
   <div class="row">
     <?php foreach ($products as $prod): ?>
-      <div class="col-md-3 col-sm-6 col-12 mb-4">
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
         <div class="card">
-          <div class="p-5">
-            <img src="<?= $prod['image']; ?>" alt="<?= $prod['name']; ?>" class="w-100">
+          <div class="py-5" style="text-align: center;">
+            <img src="<?= $prod['image']; ?>" alt="<?= $prod['name']; ?>" height="167">
           </div>
           <div class="card-body">
             <h5 class="card-title"><?= $prod['name']; ?></h5>

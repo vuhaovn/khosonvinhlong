@@ -308,10 +308,10 @@ function formatCurrency($number) {
               <a href="<?php echo base_url('/') ?>" class="nav-link">Trang chủ</a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('/') ?>" class="nav-link">Giới thiệu</a>
+              <a href="index.php?controller=home&action=about" class="nav-link">Giới thiệu</a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('/') ?>" class="nav-link">Liên hệ</a>
+              <a href="index.php?controller=home&action=contact" class="nav-link">Liên hệ</a>
             </li>
           </ul>
         </div>

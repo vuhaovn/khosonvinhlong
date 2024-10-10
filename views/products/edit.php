@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label>Introduce</label>
-        <textarea name="introduce" class="form-control"><?= $product['introduce'] ?></textarea>
+        <textarea name="introduce" id="tiny_introduce"><?= htmlspecialchars($product['introduce']) ?></textarea>
     </div>
     <div class="form-group">
         <label>Category</label>

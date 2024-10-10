@@ -15,6 +15,11 @@ class CategoryController {
         include 'views/categories/index.php';
     }
 
+    public function show($id) {
+        $category = $this->categoryModel->getById($id);
+        include 'views/categories-list.php';
+    }
+
     // Hiển thị form thêm category
     public function create() {
         include 'views/categories/create.php';
