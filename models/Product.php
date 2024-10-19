@@ -78,5 +78,14 @@ class Product {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+
+    public function searchByName($query) {
+        $query = '%' . $query . '%';
+        $sql = "SELECT * FROM " . $this->table_name . " WHERE name LIKE :query";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':query', $query, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

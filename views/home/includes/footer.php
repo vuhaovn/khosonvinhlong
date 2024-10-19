@@ -1,21 +1,20 @@
 <footer class="py-5" style="background-color: #4A4A4A; color: white;">
   <div class="container-lg">
     <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="footer-menu">
           <h2 style="color: white;">CÔNG TY TNHH MTV GIA HY PHÚC</h2>
-          <h3 style="font-weight: 600; color: white;">0979 156 017 - 0909 735 814</h3>
-          <p>
-          Địa chỉ: Số Q6, Đường Trần Phú, Phường 4, TP Vĩnh Long<br>
-          Gmail: <a href="mail:giahyphuc@gmail.com" style="color: white;">giahyphuc@gmail.com</a><br>
-          MST: 150 109 8132<br>
-          Đại diện: (Ông) BẠCH VŨ ANH KHOA - Chức vụ: Giám Đốc
+          <p>Điện thoại:
+            <a href="tel:0979156017" style="color: white; font-size: 20px;">0979 156 017</a> -
+            <a href="tel:0909735814" style="color: white; font-size: 20px;">0909 735 814</a>
           </p>
+          <p>Địa chỉ: Số Q6, Đường Trần Phú, Phường 4, TP Vĩnh Long</p>
+          <p>Gmail: <a href="mail:giahyphuc@gmail.com" style="color: white;">giahyphuc@gmail.com</a></p>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 copyright">
+      <div class="col-md-12 copyright">
         <p>© 2024 khosonvinhlong. All rights reserved.</p>
       </div>
     </div>

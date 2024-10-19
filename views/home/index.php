@@ -1,7 +1,5 @@
     <?php include 'includes/header.php';  ?>
 
-    <?php include 'includes/menu.php';  ?>
-
     <?php include 'includes/slider.php'; ?>
 
     <?php include 'includes/product.php'; ?>

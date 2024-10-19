@@ -3,11 +3,13 @@
 class HomeController {
     private $productModel;
     private $categoryModel;
+    private $contactModel;
 
     public function __construct() {
         // Khởi tạo model sản phẩm để lấy dữ liệu sản phẩm
         $this->productModel = new Product();
         $this->categoryModel = new Category();
+        $this->contactModel = new Contact();
     }
 
     public function index() {
@@ -47,5 +49,34 @@ class HomeController {
         $categories = $this->categoryModel->getAll();
         $categoryName = $this->categoryModel->getById($categoryId);
         require_once 'views/home/product-list.php';
+    }
+
+    public function search() {
+        if (isset($_POST['query'])) {
+            $query = $_POST['query'];
+
+            // Gọi model để lấy danh sách sản phẩm khớp với từ khóa tìm kiếm
+            $products = $this->productModel->searchByName($query);
+            $categories = $this->categoryModel->getAll();
+
+            // Gửi dữ liệu sang view để hiển thị kết quả
+            require 'views/home/search_result.php';
+        }
+    }
+
+    public function insertContact() {
+        // Lấy dữ liệu từ form
+        $name = $_POST['contactName'];
+        $phone = $_POST['contactPhone'];
+        $message = $_POST['contactMessage'];
+
+        $this->contactModel->add($name, $phone, $message);
+        header('Location: index.php?controller=home&action=thankyou');
+        exit();
+    }
+
+    public function thankyou() {
+        $message = "Cảm ơn bạn đã gửi liên hệ!";
+        require_once 'views/home/thankyou.php';
     }
 }

@@ -39,10 +39,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?controller=product&action=index">Products</a>
+                    <a class="nav-link" href="index.php?controller=product&action=index">Sản phẫm</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?controller=category&action=index">Categories</a>
+                    <a class="nav-link" href="index.php?controller=category&action=index">Danh mục</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?controller=contact&action=index">Danh sách liên hệ</a>
                 </li>
             </ul>
         </div>

@@ -9,11 +9,13 @@ $categoryId = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
 
 require_once 'controllers/ProductController.php';
 require_once 'controllers/CategoryController.php';
+require_once 'controllers/ContactController.php';
 require_once 'controllers/AuthController.php';
 require_once 'controllers/HomeController.php';
 
 $productController = new ProductController();
 $categoryController = new CategoryController();
+$contactController = new ContactController();
 $authController = new AuthController();
 $homeController = new HomeController();
 
@@ -34,6 +36,15 @@ switch ($controller) {
                 break;
             case 'contact':
                 $homeController->contact();
+                break;
+            case 'search':
+                $homeController->search();
+                break;
+            case 'createContact':
+                $homeController->insertContact();
+                break;
+            case 'thankyou':
+                $homeController->thankyou();
                 break;
             default:
                 header('Location: 404.php');
@@ -100,7 +111,21 @@ switch ($controller) {
             header('Location: index.php?controller=auth&action=login');
         }
         break;
-
+    case 'contact':
+        if (isset($_SESSION['user_id'])) {
+            switch ($action) {
+                case 'index':
+                    $contactController->index();
+                    break;
+                default:
+                    echo "Invalid action";
+                    break;
+            }
+        } else {
+            $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
+            header('Location: index.php?controller=auth&action=login');
+        }
+        break;
     case 'auth':
         switch ($action) {
             case 'register':

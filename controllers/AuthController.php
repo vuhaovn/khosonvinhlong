@@ -31,7 +31,15 @@ class AuthController
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-                header('Location: index.php'); // Điều hướng đến trang chủ
+                // Kiểm tra xem có URL được lưu trong session đã điều hướng đến trước đó hay không
+                if (isset($_SESSION['redirect_after_login'])) {
+                    $redirectUrl = $_SESSION['redirect_after_login'];
+                    unset($_SESSION['redirect_after_login']); // Xóa session để tránh điều hướng lại lần sau
+                    header('Location: ' . $redirectUrl);
+                } else {
+                    // Nếu không có URL được lưu, điều hướng đến trang mặc định
+                    header('Location: index.php?controller=home&action=index');
+                }
             } else {
                 $error = "Tên đăng nhập hoặc mật khẩu không đúng";
                 include 'views/auth/login.php';
