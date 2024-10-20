@@ -87,7 +87,7 @@
                       <hr class="w-50 mb-3 border-dark-subtle">
                       <div class="d-flex mb-1">
                         <p class="text-secondary fw-bold mb-0 me-5">Thứ 2 - Thứ 7</p>
-                        <p class="text-secondary mb-0">9 giờ sáng - 5 giờ chiều</p>
+                        <p class="text-secondary mb-0">7 giờ sáng - 5 giờ chiều</p>
                       </div>
                       <div class="d-flex">
                         <p class="text-secondary fw-bold mb-0 me-5">Chủ nhật</p>

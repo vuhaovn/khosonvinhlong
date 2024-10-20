@@ -8,7 +8,7 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <div class="p-5 text-center"><img src="<?= $product['image'] ?>" alt="<?= $product['name']; ?>" style="max-width: 200px; max-height: 100%;"></div>
+              <div class="p-5 text-center"><img src="<?= $product['image'] ?>" alt="<?= $product['name']; ?>" style="max-width: 100%; max-height: 300px;"></div>
             </div>
             <div class="col-sm-6">
               <div class="description">
