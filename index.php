@@ -78,6 +78,7 @@ switch ($controller) {
                     break;
             }
         } else {
+            $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
             header('Location: index.php?controller=auth&action=login');
         }
         break;
@@ -108,6 +109,7 @@ switch ($controller) {
                     break;
             }
         } else {
+            $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
             header('Location: index.php?controller=auth&action=login');
         }
         break;

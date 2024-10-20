@@ -23,6 +23,28 @@ class Category {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getParent() {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE parent_id IS NULL";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getChildren($parentId) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE parent_id = :parent_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':parent_id', $parentId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getParentCategoryName($parentId) {
+        $stmt = $this->conn->prepare("SELECT name FROM categories WHERE id = :parent_id");
+        $stmt->execute(['parent_id' => $parentId]);
+        $parentCategory = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $parentCategory ? $parentCategory['name'] : 'No Parent'; // Trả về tên category cha hoặc null nếu không tìm thấy
+    }
+
     // Lấy danh mục theo ID
     public function getById($id) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE id = ?";
@@ -33,21 +55,23 @@ class Category {
     }
 
     // Thêm danh mục mới
-    public function create($name, $image) {
-        $query = "INSERT INTO " . $this->table_name . " (name, image) VALUES (:name, :image)";
+    public function create($name, $image, $parentId = null) {
+        $query = "INSERT INTO " . $this->table_name . " (name, image, parent_id) VALUES (:name, :image, :parent_id)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':parent_id', $parentId);
         return $stmt->execute();
     }
 
     // Cập nhật danh mục
-    public function update($id, $name, $image) {
-        $query = "UPDATE " . $this->table_name . " SET name = :name, image = :image WHERE id = :id";
+    public function update($id, $name, $image, $parent_id) {
+        $query = "UPDATE " . $this->table_name . " SET name = :name, image = :image, parent_id = :parent_id WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':parent_id', $parent_id);
         return $stmt->execute();
     }
 

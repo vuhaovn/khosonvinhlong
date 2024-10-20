@@ -15,24 +15,54 @@ class HomeController {
     public function index() {
         // Lấy danh sách sản phẩm từ model
         $products = $this->productModel->getAll();
-        $categories = $this->categoryModel->getAll();
+        $categories = $this->categoryModel->getParent();
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
 
         // Gọi view để hiển thị trang chủ
         require_once "views/home/index.php";
     }
 
     public function about() {
+        $categories = $this->categoryModel->getParent();
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
         require_once "views/home/about.php";
     }
 
     public function contact() {
+        $categories = $this->categoryModel->getParent();
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
         require_once "views/home/contact.php";
     }
 
     public function detail($id) {
         // Gọi model để lấy thông tin sản phẩm theo ID
         $product = $this->productModel->getById($id);
-        $categories = $this->categoryModel->getAll();
+        $categories = $this->categoryModel->getParent();
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
 
         // Kiểm tra nếu sản phẩm không tồn tại
         if (!$product) {
@@ -46,8 +76,15 @@ class HomeController {
 
     public function listByCategory($categoryId) {
         $products = $this->productModel->getProductsByCategoryId($categoryId);
-        $categories = $this->categoryModel->getAll();
+        $categories = $this->categoryModel->getParent();
         $categoryName = $this->categoryModel->getById($categoryId);
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
         require_once 'views/home/product-list.php';
     }
 
@@ -57,7 +94,14 @@ class HomeController {
 
             // Gọi model để lấy danh sách sản phẩm khớp với từ khóa tìm kiếm
             $products = $this->productModel->searchByName($query);
-            $categories = $this->categoryModel->getAll();
+            $categories = $this->categoryModel->getParent();
+            $cateChild = [];
+            foreach ($categories as $category) {
+                $children = $this->categoryModel->getChildren($category['id']);
+                if (!empty($children)) {
+                    $cateChild = array_merge($cateChild, $children);
+                }
+            }
 
             // Gửi dữ liệu sang view để hiển thị kết quả
             require 'views/home/search_result.php';
@@ -77,6 +121,14 @@ class HomeController {
 
     public function thankyou() {
         $message = "Cảm ơn bạn đã gửi liên hệ!";
+        $categories = $this->categoryModel->getParent();
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
         require_once 'views/home/thankyou.php';
     }
 }

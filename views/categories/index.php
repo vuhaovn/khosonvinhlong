@@ -7,14 +7,30 @@
     <thead>
         <tr>
             <th>Category Name</th>
+            <th>Category Parent ID</th>
             <th>Category Image</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($categories as $category): ?>
+        <?php
+        function getParentName($data, $parentId) {
+            $filtered = array_filter($data, function($item) use ($parentId) {
+                return $item['id'] == $parentId;
+            });
+            // Reset the array keys and get the first element if available
+            $parent = reset($filtered);
+            return $parent ? $parent['name'] : 'No parent';
+        }
+        ?>
+        <?php foreach ($cateChild as $category): ?>
             <tr>
-                <td><?= $category['name']; ?></td>
+                <td>
+                    <?= $category['name']; ?>
+                </td>
+                <td>
+                    <?= getParentName($categories, $category['parent_id']); ?>
+                </td>
                 <td><img src="<?= $category['image']; ?>" width="100"></td>
                 <td>
                     <a href="index.php?controller=category&action=edit&id=<?= $category['id']; ?>">Edit</a> |

@@ -12,6 +12,13 @@ class CategoryController {
     // Hiển thị danh sách category
     public function index() {
         $categories = $this->categoryModel->getAll();
+        $cateChild = [];
+        foreach ($categories as $category) {
+            $children = $this->categoryModel->getChildren($category['id']);
+            if (!empty($children)) {
+                $cateChild = array_merge($cateChild, $children);
+            }
+        }
         include 'views/categories/index.php';
     }
 
@@ -22,6 +29,7 @@ class CategoryController {
 
     // Hiển thị form thêm category
     public function create() {
+        $parentCategories = $this->categoryModel->getParent();
         include 'views/categories/create.php';
     }
 
@@ -29,6 +37,7 @@ class CategoryController {
     public function store() {
         // Lấy dữ liệu từ form
         $name = $_POST['name'];
+        $parentId = !empty($_POST['parent_id']) ? $_POST['parent_id'] : null;
 
         // Xử lý upload file
         if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
@@ -47,7 +56,7 @@ class CategoryController {
                 // Upload file vào thư mục
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
                     // Lưu thông tin sản phẩm và đường dẫn hình ảnh vào cơ sở dữ liệu
-                    if ($this->categoryModel->create($name, $target_file)) {
+                    if ($this->categoryModel->create($name, $target_file, $parentId)) {
                         header("Location: index.php?controller=category&action=index");
                         exit(); // Dừng script sau khi chuyển hướng
                     } else {
@@ -67,6 +76,7 @@ class CategoryController {
     // Hiển thị form sửa category
     public function edit($id) {
         $category = $this->categoryModel->getById($id);
+        $parentCategories = $this->categoryModel->getParent();
         include 'views/categories/edit.php';
     }
 
@@ -76,6 +86,7 @@ class CategoryController {
         // Xử lý tên, giá và category
         $name = $_POST['name'];
         $image = $_FILES['image'];
+        $parentId = !empty($_POST['parent_id']) ? $_POST['parent_id'] : null;
 
         // Kiểm tra xem người dùng có upload hình ảnh mới không
         // Xử lý upload file
@@ -102,7 +113,7 @@ class CategoryController {
             $image = $category['image'];
         }
 
-        $this->categoryModel->update($id, $name, $image);
+        $this->categoryModel->update($id, $name, $image, $parentId);
 
         header("Location: index.php?controller=category&action=index");
         exit(); // Dừng script sau khi chuyển hướng

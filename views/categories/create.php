@@ -11,6 +11,15 @@
         <label>Category Image</label>
         <input type="file" name="image" class="form-control" required>
     </div>
+    <div class="form-group">
+        <label>Parent Category</label>
+        <select name="parent_id" class="form-control">
+            <option value="">No Parent</option>
+            <?php foreach ($parentCategories as $parent): ?>
+                <option value="<?= $parent['id']; ?>"><?= $parent['name']; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">Create category</button>
 </form>
 

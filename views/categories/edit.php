@@ -2,6 +2,11 @@
 <?php include 'views/layouts/header.php'; ?>
 
 <h1>Edit Category</h1>
+<?php
+    // echo "<pre>";
+    // print_r($category);
+    // echo "</pre>";
+?>
 <form method="POST" action="index.php?controller=category&action=update&id=<?= $category['id'] ?>" enctype="multipart/form-data">
     <div class="form-group">
         <label>Category Name</label>
@@ -19,6 +24,17 @@
     <div class="form-group">
         <label>Upload New Category Image</label>
         <input type="file" name="image" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Parent Category</label>
+        <select name="parent_id" class="form-control">
+            <option value="">No Parent</option>
+            <?php foreach ($parentCategories as $parent): ?>
+                <option value="<?= $parent['id']; ?>" <?= $parent['id'] == $category['parent_id'] ? 'selected' : '' ?>>
+                    <?= $parent['name']; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
